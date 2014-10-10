@@ -1,4 +1,3 @@
-require 'validates_timeliness'
 class Issue < ActiveRecord::Base
   belongs_to :user
   validates_presence_of :user

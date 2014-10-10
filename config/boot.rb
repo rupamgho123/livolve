@@ -4,17 +4,12 @@ PADRINO_ENV  = ENV["PADRINO_ENV"] ||= ENV["RACK_ENV"] ||= "development"  unless 
 PADRINO_ROOT = File.expand_path('../..', __FILE__) unless defined?(PADRINO_ROOT)
 
 # Load our dependencies
-require 'rubygems' unless defined?(Gem)
+# require 'rubygems' unless defined?(Gem)
 require 'bundler/setup'
 require 'restclient'
-require 'action_dispatch'
-require 'sc_core/add_timestamp_migrations_to_padrino'
-require 'logger'
-require 'sc_core/supply_chain'
 Bundler.require(:default, PADRINO_ENV)
-require 'sc_core/base_application'
-
-
+require 'padrino'
+require 'validates_timeliness'
 
 Padrino.before_load do
 end

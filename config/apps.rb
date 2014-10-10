@@ -31,5 +31,5 @@ Padrino.configure_apps do
 end
 
 # Mounts the core application for this project
-Padrino.mount("RackMetrics", :app_class => "RackMetrics::App").to("/metrics")
+# Padrino.mount("RackMetrics", :app_class => "RackMetrics::App").to("/metrics")
 Padrino.mount("Livolve").to('/')

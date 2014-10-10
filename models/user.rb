@@ -1,4 +1,3 @@
-require 'validates_timeliness'
 class User < ActiveRecord::Base
   has_many :issue
   belongs_to :team

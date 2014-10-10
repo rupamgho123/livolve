@@ -1,4 +1,4 @@
-class Livolve < ScCore::BaseApplication
+class Livolve < Padrino::Application
   register Padrino::Rendering
   register Padrino::Mailer
   register Padrino::Helpers
@@ -47,15 +47,15 @@ class Livolve < ScCore::BaseApplication
   #   end
   #
 
-  error ActiveRecord::RecordNotFound do
-    log_warning
-    json_status 404, SupplyChainError.new({:code=>"NOT_FOUND" ,:message=>"Record Not Found"})
-  end
-
-  error ActiveRecord::RecordInvalid do
-    log_warning
-    json_status 400, SupplyChainError.new({:code=>"OPERATION_FAILED" ,:message => env['sinatra.error'].message})
-  end
+  #  error ActiveRecord::RecordNotFound do
+  #    log_warning
+  #    json_status 404, SupplyChainError.new({:code=>"NOT_FOUND" ,:message=>"Record Not Found"})
+  #  end
+  #
+  #  error ActiveRecord::RecordInvalid do
+  #    log_warning
+  #    json_status 400, SupplyChainError.new({:code=>"OPERATION_FAILED" ,:message => env['sinatra.error'].message})
+  #  end
 
 
   ##

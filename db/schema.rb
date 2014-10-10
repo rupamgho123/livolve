@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(:version => 5) do
   end
 
   create_table "issues", :force => true do |t|
+    t.integer  "user_id"
     t.text     "value"
     t.string   "status"
     t.datetime "created_at"
