@@ -12,12 +12,14 @@ require 'padrino'
 require 'validates_timeliness'
 
 Padrino.before_load do
+  p "before load called"
 end
 
 ##
 # Add your after load hooks here
 #
 Padrino.after_load do
+  p "after load called"
   Padrino.require_dependencies Padrino.root('app/helpers/*.rb')
   Padrino.require_dependencies Padrino.root('app/errors/*.rb')
 end

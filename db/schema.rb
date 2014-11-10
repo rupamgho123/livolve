@@ -9,21 +9,21 @@
 # from scratch. The latter is a flawed and unsustainable approach (the more migrations
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
-# It's strongly recommended to check this file into your version control system.
+# It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 5) do
+ActiveRecord::Schema.define(version: 5) do
 
-  create_table "conversations", :force => true do |t|
+  create_table "conversations", force: true do |t|
     t.integer  "user_id"
     t.integer  "issue_id"
     t.text     "value"
     t.string   "status"
-    t.string   "is_solution", :limit => 1
+    t.string   "is_solution", limit: 1
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "invitations", :force => true do |t|
+  create_table "invitations", force: true do |t|
     t.integer  "issue_id"
     t.integer  "user_id"
     t.string   "status"
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(:version => 5) do
     t.datetime "updated_at"
   end
 
-  create_table "issues", :force => true do |t|
+  create_table "issues", force: true do |t|
     t.integer  "user_id"
     t.text     "value"
     t.string   "status"
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(:version => 5) do
     t.datetime "updated_at"
   end
 
-  create_table "teams", :force => true do |t|
+  create_table "teams", force: true do |t|
     t.string   "auth_token"
     t.string   "name"
     t.integer  "manager_id"
@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(:version => 5) do
     t.datetime "updated_at"
   end
 
-  create_table "users", :force => true do |t|
+  create_table "users", force: true do |t|
     t.integer  "team_id"
     t.string   "auth_token"
     t.string   "name"

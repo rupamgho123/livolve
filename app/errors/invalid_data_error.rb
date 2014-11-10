@@ -1,0 +1,2 @@
+class InvalidDataError < StandardError
+end

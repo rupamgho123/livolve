@@ -68,5 +68,7 @@ class Livolve < Padrino::Application
   #   error 505 do
   #     render 'errors/505'
   #   end
-  #
+  # error InvalidDataError do
+  #    {:message => message}.to_json
+  # end   
 end

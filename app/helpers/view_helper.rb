@@ -1,4 +1,4 @@
-module ViewHelpers
+module ViewHelper
     def json_status(code, response)
       content_type 'application/json'
       status code
@@ -32,7 +32,7 @@ module ViewHelpers
             # FIXME: read attribute fails for validations on collections. Suppressing the exception as of now. Find a better way
           end
         end
-        status_code = 409 if error_message.code == :SC_ALREADY_EXISTS
+        status_code = 409 if error_message.code == 100
         {:code => error_message.code , :params=>{:field=> attribute, :value=>raw_value},
          :message=>error_message.message}
       end
@@ -44,15 +44,15 @@ module ViewHelpers
     def validate_http_request_body(request, symbolize_names=false)
       request.body.rewind
       data = request.body.read
-      raise InvalidDataError, {:code=> :SC_INVALID_REQUEST_BODY} if data.empty?
+      raise InvalidDataError, {:code=> "Invalid Request body"} if data.empty?
       module_request = JSON.parse(data, :symbolize_names => symbolize_names, :symbolize_keys => symbolize_names)
-      raise InvalidDataError, {:code=> :SC_INVALID_REQUEST_BODY} if module_request.empty?
+      raise InvalidDataError, {:code=> "Invalid Request body"} if module_request.empty?
       return module_request
     end
     
     def validate_presence_of(params, keys)
       keys.each do |key|
-        raise InvalidDataError.new({:code => :SC_NOT_FOUND, :params => {key => params[key]}, :message => "Please pass the param #{key}"}) if params[key].empty?
+        raise InvalidDataError.new({:code => "Not found", :params => {key => params[key]}, :message => "Please pass the param #{key}"}) if params[key].empty?
       end
     end
 
