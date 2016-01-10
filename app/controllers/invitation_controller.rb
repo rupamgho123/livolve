@@ -4,7 +4,9 @@ Livolve.controllers :invite do
     invite_request = validate_http_request_body(request, true)
     invite = Invitation.create(invite_request.merge!({:status => 'pending'}))
     invite.save!
-    send_custom_response(invite, [], [], 201)
+    status 201
+    invite.to_json
+    # send_custom_response(invite, [], [], 201)
   end
 
   post '/bulk', :provides => :json do
@@ -16,13 +18,16 @@ Livolve.controllers :invite do
       invite.save!
     end
     status 200
+    user_ids.to_json
   end
 
   get '/:user_id/:status', :provides => :json do
     user_id = params[:user_id]
     status = params[:status]
     invitations = Invitation.where({:user_id => user_id, :status => status})
-    send_custom_response(invitations)
+    status 200
+    invitations.to_json
+    # send_custom_response(invitations)
   end
 
   get '/:user_id/:status/issues', :provides => :json do
@@ -33,7 +38,10 @@ Livolve.controllers :invite do
     invitations.each do |invite|
       issues << Issue.find(invite[:id])
     end
-    send_custom_response(issues)
+
+    status 200
+    issues.to_json
+    # send_custom_response(issues)
   end
 
   put '/:id/status/:status', :provides => :json do

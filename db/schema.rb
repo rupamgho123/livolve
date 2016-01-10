@@ -23,6 +23,9 @@ ActiveRecord::Schema.define(version: 5) do
     t.datetime "updated_at"
   end
 
+  add_index "conversations", ["user_id", "issue_id"], name: "user_id", using: :btree
+  add_index "conversations", ["user_id", "issue_id"], name: "user_issue_idx", using: :btree
+
   create_table "invitations", force: true do |t|
     t.integer  "issue_id"
     t.integer  "user_id"

@@ -4,13 +4,17 @@ Livolve.controllers :conversation do
     user_id = params[:user_id]
     issue_id = params[:issue_id]
     conversations = Conversation.where({:user_id => user_id, :issue_id => issue_id})
-    send_custom_response(conversations)
+    status 200
+    conversations.to_json
+    # send_custom_response(conversations)
   end
 
   get '/:issue_id', :provides => :json do
     issue_id = params[:issue_id]
     conversations = Conversation.where({:issue_id => issue_id})
-    send_custom_response(conversations, [:user])
+    status 200
+    conversations.to_json
+    # send_custom_response(conversations, [:user])
   end
 
   post '/new', :provides => :json do
@@ -18,7 +22,9 @@ Livolve.controllers :conversation do
     conversation_request.merge!({:is_solution => 'N'})
     conversation = Conversation.create(conversation_request)
     conversation.save!
-    send_custom_response(conversation, [], [], 201)
+    status 201
+    conversation.to_json
+    # send_custom_response(conversation, [], [], 201)
   end
 
   put '/:id/solution', :provides => :json do

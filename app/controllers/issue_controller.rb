@@ -6,10 +6,13 @@
       issue = Issue.new(user_request.merge!({:status => 'created'}))
       begin
         issue.save!
-        send_custom_response(issue, [], [], 201)
+        status 201
+        issue.to_json
+        # send_custom_response(issue, [], [], 201)
       rescue ActiveRecord::RecordInvalid => e
-        send_custom_response(
-            {:message => 'Unable to create the issue', :error => e.message},[], [], 400, nil, content_type)
+        status 400
+        # send_custom_response(
+        #     {:message => 'Unable to create the issue', :error => e.message},[], [], 400, nil, content_type)
       end
     end
 
@@ -23,12 +26,16 @@
       raise InvalidDataError.new({:message => "No issue found with id : #{params[:id]}"}) if issue.blank?
       begin
         issue.update_attributes!({:status => params[:status]})
-        send_custom_response({:message => 'Success'}, [], [], 204, nil, content_type)
+        status 204
+        response = {:message => 'Success'}
+        # send_custom_response({:message => 'Success'}, [], [], 204, nil, content_type)
       rescue ActiveRecord::RecordInvalid => e
-        send_custom_response(
-            {:message => 'Unable to change the status of issue', :error => e.message},[], [], 400, nil, content_type)
+        status 400
+        response = {:a => 1}
+        # send_custom_response(
+        #     {:message => 'Unable to change the status of issue', :error => e.message},[], [], 400, nil, content_type)
       end
-      {:a => 1}
+      response.to_json
     end
   end
 
